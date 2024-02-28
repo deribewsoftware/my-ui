@@ -46,10 +46,13 @@ const onAddQuestion=() => {
     
         setQuestions((prev:any)=>prev? [...prev,question]:[question])
         console.log("questions", questions)
+       
 };
 
 
 console.log("questions", questions)
+
+
 
   return ( <div className="flex min-h-screen w-full  justify-center py-20">
 
@@ -66,18 +69,36 @@ console.log("questions", questions)
        <div className="flex flex-col px-4 gap-2 py-10">
         <div className="flex w-full justify-between pb-4">
           <h1 className="text-xl font-semibold">Add Question from this lesson</h1>
-          <p className="text-gray-600">0 question</p>
+          <p className="text-gray-600">{questions.length} question</p>
         </div>
 
         <div className="w-full">
 <textarea
 onChange={(event)=>setQuestion({...question,Q:event.target.value})}
-className="w-full bg-gray-300"
+className="block 
+p-2.5 w-full 
+text-sm 
+text-gray-900 
+bg-gray-50 
+
+rounded-lg 
+border 
+border-gray-300
+ focus:ring-blue-500 
+ focus:border-blue-500 
+ dark:bg-gray-700 
+ dark:border-gray-600 
+ dark:placeholder-gray-400 
+ dark:text-white 
+ dark:focus:ring-blue-500 
+dark:focus:border-blue-500
+"
+rows={4}
 ></textarea>
 
 
 
-<div className="p-4 flex flex-col gap-2">
+<div className={`p-4 flex flex-col gap-2 ${question.Q!==""? 'block':'hidden'}`}>
 
    <ChooseForm 
     onChange={(event) => setQuestion({ ...question, A:{ ...question.A,choose: event.target.value } })} 
@@ -94,7 +115,7 @@ className="w-full bg-gray-300"
    <ChooseForm 
     label="C"
    onChange={(event)=>setQuestion({...question,C:{...question.C,choose:event.target.value}})}
-   onAnswer={(event) => setQuestion({ ...question, C: {...question.C, isAnswer: event.target.value } })} 
+   onAnswer={(event) => setQuestion({ ...question, C: {...question.C, isAnswer: event.target.value} })} 
    />
 
    <ChooseForm 
