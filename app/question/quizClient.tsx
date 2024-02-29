@@ -1,5 +1,14 @@
 "use client"
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -7,7 +16,7 @@ import {
 } from "@/components/ui/accordion"
 import { Questions } from "@/lib/questions";
 import { useState } from "react";
-import QuizOption from "./quizOptionModal";
+
 import { useRouter } from "next/navigation";
 
 const QuizClient = () => {
@@ -45,7 +54,10 @@ const onSubmit=()=>{
 
   return ( <>
  
-  {showQuiz?<div id="quiz">
+  {showQuiz?<div className="pt-10" id="quiz">
+    <div className="p-2 py-10">
+      <h4 className="text-lg font-bold border-b-2 border-dashed">Quizzes of Indroduction of Biology</h4>
+    </div>
       {
         Questions.map((question:any,index)=>{
         return <div key={index} className="">
@@ -118,20 +130,56 @@ const onSubmit=()=>{
 
 
       <div className="flex justify-end p-4 ">
-      <button 
+     
+     <Dialog>
+      <DialogTrigger> <button 
       onClick={onSubmit}
-       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>
+       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit
+       </button></DialogTrigger>
+       <DialogContent>
+        <div className="flex justify-center w-full">
+        <div className="w-48 h-48 flex justify-center items-center rounded-full border-2">
+          <p className="text-2xl font-bold">{score}/{Questions.length}</p>
+        </div>
+        </div>
+       </DialogContent>
+     </Dialog>
+
+
       </div></div>:
-      <div className="">
-      <QuizOption onRightAnswer={()=>{
-         setFeedbackVisible(true);
-         setShowQuiz(true);
-         router.push("/question#quiz")
-      }} onCompleteAnswer={()=>{
-        setFeedbackVisible(false);
-        setShowQuiz(true);
-        router.push("/question#quiz")
-      }}/>
+      <div className="flex justify-center w-full p-10">
+      
+<Dialog>
+  <DialogTrigger>
+  <div 
+  className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+   Start Quizzess</div>
+  </DialogTrigger>
+  <DialogContent>
+  <div className="p-10 flex flex-col gap-4">
+        <button
+          onClick={()=>{
+            setFeedbackVisible(true);
+            setShowQuiz(true);
+            router.push("/question#quiz")
+         }}
+          className="text-white bg-green-500 px-4 py-2 rounded-md mr-2 hover:bg-green-600 focus:outline-none"
+        >
+          Check Right Answer Now!
+        </button>
+        <button
+          onClick={()=>{
+            setFeedbackVisible(false);
+            setShowQuiz(true);
+            router.push("/question#quiz")
+          }}
+          className="text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+        >
+          Show Answers After Quiz
+        </button>
+      </div>
+  </DialogContent>
+</Dialog>
       </div>
       }
       
