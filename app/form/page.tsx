@@ -1,11 +1,21 @@
 
 "use client"
 
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import ChooseForm from "./chooseForm";
 import { AiOutlineSave } from "react-icons/ai";
 import { FieldValues, useForm } from "react-hook-form";
 import { useState } from "react";
+import { yearsExams } from "@/lib/years";
+import TextEditor from "@/components/textEditor";
 
 
 const FormPage = () => {
@@ -13,6 +23,8 @@ const FormPage = () => {
     const [questions,setQuestions]=useState<any[]>([])
     const [question,setQuestion]=useState<any>(
         {Q:"",
+        year:"",
+        explanation:"",
 A:{
     choose:"",
     isAnswer:false,
@@ -43,14 +55,48 @@ const {register,handleSubmit,formState:{errors}}=useForm<FieldValues>({
 
 
 const onAddQuestion=() => {
+  const qData={
+    lessonId:"lesson.id",
+    year:question.year,
+    explanation:"",
+    title:question.Q,
+    chooses:[question.A,question.B,question.C,question.D]
+  
+  }
     
-        setQuestions((prev:any)=>prev? [...prev,question]:[question])
-        console.log("questions", questions)
+        setQuestions((prev:any)=>prev? [...prev,qData]:[qData])
+
+
+
+        setQuestion( {
+          Q:"",
+        year:"",
+        explanation:"",
+        A:{
+            choose:"",
+            isAnswer:false,
+        },
+        B:{
+            choose:"",
+            isAnswer:false,
+        },
+        
+        C:{
+            choose:"",
+            isAnswer:false,
+        },
+        D:{
+            choose:"",
+            isAnswer:false,
+        },
+        })
+       
+
        
 };
 
 
-console.log("questions", questions)
+console.log("questions", questions, 'here')
 
 
 
@@ -73,9 +119,32 @@ console.log("questions", questions)
         </div>
 
         <div className="w-full">
+          <div className="p-4">
+          <Select onValueChange={
+            (value)=>setQuestion({...question,year:value})
+          }>
+      <SelectTrigger  className="w-[180px]">
+        <SelectValue  placeholder="Select a Quizzes Year" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup onChange={
+          ()=>{
+            console.log('changed')
+          }
+        } >
+          <SelectLabel>Select a Quizzes Year</SelectLabel>
+         {yearsExams.map((year,index) =>{
+         return  <SelectItem  key={index} value={year}>{year}</SelectItem >
+         })}
+          
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+          </div>
 <textarea
+defaultValue={question?.Q}
 onChange={(event)=>setQuestion({...question,Q:event.target.value})}
-className="block 
+className={`block 
 p-2.5 w-full 
 text-sm 
 text-gray-900 
@@ -92,7 +161,8 @@ border-gray-300
  dark:text-white 
  dark:focus:ring-blue-500 
 dark:focus:border-blue-500
-"
+${question.year!==""? 'block':'hidden'}
+`}
 rows={4}
 ></textarea>
 
@@ -123,8 +193,25 @@ rows={4}
    onChange={(event)=>setQuestion({...question,D:{...question.D,choose:event.target.value}})}
    onAnswer={(event) => setQuestion({ ...question, D: {...question.D, isAnswer: event.target.value } })} 
    />
-   
-   <div className="w-full flex justify-end px-2 py-4">
+   <div className="p-4">
+    <TextEditor/>
+   </div>
+   <div className="w-full flex justify-end px-2 gap-4 py-4">
+   <button 
+    onClick={onAddQuestion}
+    className="
+    flex gap-1 
+    text-sm 
+    text-gray-600
+     bg-gray-400 
+     border 
+     border-gray-300 
+     rounded-[10px]
+     hover:bg-gray-600
+     hover:text-white
+     font-medium
+
+     px-2 py-1">submit</button>
     <button 
     onClick={onAddQuestion}
     className="
@@ -139,7 +226,7 @@ rows={4}
      hover:text-white
      font-medium
 
-     px-2 py-1"><AiOutlineSave className="mt-1"/> <p>save</p></button>
+     px-2 py-1"><AiOutlineSave className="mt-1"/> <p>Add</p></button>
    </div>
 </div>
 
