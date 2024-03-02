@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MdOutlineDashboard } from "react-icons/md";
 const DashboardLayout = ({children}:{children:ReactNode}) => {
   return ( <>
-  <div className="fixed flex h-12 w-full shadow-md bg-white justify-evenly items-center">
+  <div className="z-50 fixed flex h-12 w-full shadow-md bg-white justify-evenly items-center">
     <h2>Home</h2>
     <h2>Home</h2>
     <h2>Home</h2>

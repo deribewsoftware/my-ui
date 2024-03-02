@@ -1,16 +1,18 @@
-'use client'
-import { courses } from '@/lib/course';
-import { useEffect, useState } from 'react';
-import { BarChart, Bar, CartesianGrid, Tooltip, Legend, YAxis, XAxis, Rectangle, ResponsiveContainer } from 'recharts'
+
+"use client"
+import { courses } from "@/lib/course";
+import { useState, useEffect } from "react";
+import { ResponsiveContainer, BarChart, Bar, Rectangle, CartesianGrid, Tooltip, Legend, YAxis, XAxis } from "recharts";
+
 
 
 interface MonthlyData {
   name: string;
-  courses: number;
-
+ 
+  totalPrices: number;
 }
-
-export default function BarsTest() {
+const TotalPricesInMonth = () => {
+  
 
 
  
@@ -28,7 +30,7 @@ export default function BarsTest() {
 
       const totalPrices = coursesInMonth.reduce((sum, course) => sum + course.price, 0);
 
-      return { name: monthName, courses: coursesInMonth.length};
+      return { name: monthName, totalPrices };
     });
 
     setMonthlyData(monthlyData);
@@ -45,17 +47,15 @@ export default function BarsTest() {
     }}
      width={1000} height={500} data={monthlyData}
     >
-        <Tooltip />
-      <Bar dataKey="courses" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />}  />
-     
+     <Tooltip/>
+      <Bar  dataKey="totalPrices" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
       <CartesianGrid strokeDasharray="3 3" />
-    
+      
       <Legend/>
       <YAxis/>
       <XAxis dataKey='name'/>
     </BarChart>
     </ResponsiveContainer>
-  )
-}
-
-
+  )}
+ 
+export default TotalPricesInMonth;
