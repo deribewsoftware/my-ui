@@ -5,7 +5,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { chapterList } from "@/lib/chapterList"
-
+import { IoMdAdd } from "react-icons/io";
+import ActionButton from "./actionButton";
 export function ChapterList() {
   return (
     <Accordion type="single" collapsible className="w-full">
@@ -16,6 +17,23 @@ export function ChapterList() {
         </AccordionTrigger>
         <AccordionContent>
         <div className="flex flex-col">
+
+          <div className="p-4 flex justify-between">
+            <div className="flex gap-4">
+            <ActionButton 
+            label="Edit Chapter"
+            url="/"
+            icon={IoMdAdd}/>
+            <ActionButton 
+            label="Delete Chapter"
+            url="/"
+            icon={IoMdAdd}/>
+            </div>
+            <ActionButton 
+            label="Add Lesson"
+            url="/"
+            icon={IoMdAdd}/>
+          </div>
   <div className="-m-1.5 overflow-x-auto">
     <div className="p-1.5 min-w-full inline-block align-middle">
       <div className="overflow-hidden">
