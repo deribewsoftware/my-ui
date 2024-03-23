@@ -1,5 +1,7 @@
 import CategoryCard from "@/components/card/categoryCard";
+import { ChapterList } from "@/components/chapterList";
 import Hero from "@/components/hero/hero";
+import RegInput from "@/components/input/regInput";
 import { ExamsCategory } from "@/lib/examsCategory";
 import { CiSearch } from "react-icons/ci";
 
@@ -26,7 +28,22 @@ export default function Home() {
        
 
       </div>
+ 
+     <div className="flex justify-center w-full">
+     <div className="w-[400px] space-y-6 bg-white p-4">
+  <RegInput/>
+  <RegInput/>
+ </div>
+     </div>
 
+
+
+<div className="flex justify-center w-full  p-4 lg:p-10">
+  <div className="w-full lg:w-8/12 xl:w-7/12 2xl:w-1/2 bg-white p-2">
+    <ChapterList/>
+  </div>
+
+</div>
       <div className="h-73"></div>
      </div>
   </main>

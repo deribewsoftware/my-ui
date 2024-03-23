@@ -36,7 +36,7 @@ const router=useRouter();
           role="combobox"
           aria-expanded={open}
           
-          className=" w-full   md:min-w-[500px] max-w-[800px] justify-between"
+          className=" w-full    md:min-w-[500px] max-w-[800px] justify-between"
         >
           {value
             ? universityDepartment.find((department) => department.department === value)?.department
