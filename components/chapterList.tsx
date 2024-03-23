@@ -31,7 +31,8 @@ import ActionButton from "./actionButton";
 import Link from "next/link"
 export function ChapterList() {
   return (
-    <Accordion type="single" collapsible className="w-full">
+
+    <Accordion type="single" collapsible className="w-fu">
       {chapterList.map((chapter,index)=>{
         return <AccordionItem key={index} value={`${index}`}>
         <AccordionTrigger className="hover:no-underline">
