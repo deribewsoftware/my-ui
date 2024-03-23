@@ -1,3 +1,4 @@
+
 import {
   Accordion,
   AccordionContent,
@@ -6,14 +7,16 @@ import {
 } from "@/components/ui/accordion"
 import { chapterList } from "@/lib/chapterList"
 import { IoMdAdd } from "react-icons/io";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import ActionButton from "./actionButton";
 export function ChapterList() {
   return (
     <Accordion type="single" collapsible className="w-full">
       {chapterList.map((chapter,index)=>{
         return <AccordionItem key={index} value={`${index}`}>
-        <AccordionTrigger>
-        <h5>{chapter.title}</h5>
+        <AccordionTrigger className="hover:no-underline">
+        <h5 className="flex text-[14px] gap-2 font-medium"><p>Chapter {index+1}: </p><p>{chapter.title}</p></h5>
         </AccordionTrigger>
         <AccordionContent>
         <div className="flex flex-col">
@@ -23,11 +26,11 @@ export function ChapterList() {
             <ActionButton 
             label="Edit Chapter"
             url="/"
-            icon={IoMdAdd}/>
+            icon={MdModeEdit}/>
             <ActionButton 
             label="Delete Chapter"
             url="/"
-            icon={IoMdAdd}/>
+            icon={MdDelete}/>
             </div>
             <ActionButton 
             label="Add Lesson"

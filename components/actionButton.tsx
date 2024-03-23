@@ -1,4 +1,4 @@
-"use client"
+
 
 import Link from 'next/link';
 import React from 'react'
@@ -9,7 +9,7 @@ interface ActionButtonProps{
   url:string;
 }
 const ActionButton:React.FC<ActionButtonProps> = ({label,url,icon:Icon}) => {
-  return (<Link  href={url} className=" no-underline hover:underline py-2.5 px-5 me-2 mb-2
+  return (<Link  href={url} className="py-2.5 px-5 me-2 mb-2
   text-sm font-medium text-gray-900 focus:outline-none
    bg-white rounded-full border border-gray-200 
    hover:bg-gray-100 hover:text-blue-700 focus:z-10 
